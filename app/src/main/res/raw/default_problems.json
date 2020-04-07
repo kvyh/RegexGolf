@@ -1,0 +1,24 @@
+{"problems": [
+  { "id": 0,
+    "title":"Intro",
+    "difficulty": 1,
+    "shortest": 3,
+    "target": "foo foo\nbar foo\nbaz foo",
+    "reject": "baz baz\nfoo bar",
+    "source": "Kvyh"},
+  { "id": 1,
+    "title": "Range",
+    "difficulty": 1,
+    "shortest": 6,
+    "target": "find\nget\nhave\ninspire\njest\nkeep\nleave\nmake",
+    "reject": "save\nspend\nbrave\nneed\ncreate\npay\nyearn\npyre",
+    "source": "Kvyh"},
+  { "id": 2,
+    "title": "ScrollTest",
+    "difficulty": 1,
+    "shortest": 6,
+    "target": "a\nb\nc\nd\ne\nf\ng\nh\ni\nj\ni\nh\ng\nf\ne\nd\nc\nb\na\nb\nc\nd\ne\nf",
+    "reject": "i\nj\nk\nl\nm\nn\no\np\nq\nr\ns\nr\nq\np\no\nn\nm\nl\nk\nj\ni\nj\nk\nl",
+    "source": "Kvyh"}
+  ]
+}

@@ -1,0 +1,15 @@
+            Main menu
+
+"problem_list_entry_title_text_view" } "problem_list_entry"
+"problem_list_entry_added_text_view" ]
+"problem_list_entry_title_text_view" } "problem_list_entry"
+"problem_list_entry_added_text_view" ]
+            "
+            "
+
+            Golf Problem
+
+   "@string/regex_prompt" "regex_input_text" } "regex_input_container"
+
+"golf_problem_desired_text_view"    } "golf_problem"
+"golf_problem_undesired_text_view"  ]
