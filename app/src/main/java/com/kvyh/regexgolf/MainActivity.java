@@ -1,7 +1,6 @@
 package com.kvyh.regexgolf;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
@@ -9,8 +8,6 @@ import androidx.room.Room;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
@@ -37,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
 
         adapter.reload();
         // If the adapter isn't registering problems correctly, reload
-        if (adapter.problems.size() == 0){
+        if (adapter.problems.size() < database.problemDao().getAllProblems().size()){
             finish();
             startActivity(getIntent());
         }
@@ -54,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.menu_reload:
                 adapter.addDefaultProblems(getApplicationContext());
+                adapter.reload();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

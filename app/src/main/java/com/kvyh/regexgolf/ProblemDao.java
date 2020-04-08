@@ -7,8 +7,8 @@ import java.util.List;
 
 @Dao
 public interface ProblemDao {
-    @Query("Select * FROM solutions WHERE id = :problem_id")
-    List<Solution> getProblemSolutions(int problem_id);
+    @Query("Select solution FROM solutions WHERE problem_id = :problem_id")
+    List<String> getProblemSolutions(int problem_id);
 
     @Query("Insert INTO solutions (problem_id, solution, length) " +
             "VALUES (:problemId, :regex, :length)")

@@ -18,7 +18,7 @@ import java.util.regex.Pattern;
 public class TextLines {
     private String stringFormat;
     private List<String> lines;
-    private List<Boolean> selected;
+    public List<Boolean> selected;
     private SpannableString displayString;
     public Integer background;
     public List<CharacterStyle> highlights;
@@ -96,11 +96,11 @@ public class TextLines {
         for (int i = 0; i < lines.size(); i += 1) {
             Matcher m = p.matcher(lines.get(i));
             if (m.find()) {
-                Log.i("kvyhPerformRegex", "selected line: " + lines.get(i));
+                Log.i("kvyhRegex", "selected line: " + lines.get(i));
                 selected.add(true);
             }
             else {
-                Log.i("kvyhPerformRegex", "Didn't select line: " + lines.get(i));
+                Log.i("kvyhRegex", "Didn't select line: " + lines.get(i));
                 selected.add(false);
             }
         }

@@ -83,6 +83,7 @@ public class ProblemListAdapter extends
                                 prob.getString("target"),
                                 prob.getString("reject"),
                                 prob.getString("source"));
+                        Log.i("kvyhregex", "reading target:" + tempProblem.getTargetString());
                         tempProblem.addToDB();
                     }
                 } catch (JSONException e) { Log.e("problemsJSONfile", e.getMessage()); }

@@ -26,4 +26,12 @@
 
     <include layout="@layout/golf_problem_content"/>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="15dp"
+        android:background="@android:color/darker_gray"
+        android:layout_gravity="center_horizontal"
+        android:id="@+id/solutions"/>
+
 </LinearLayout>

@@ -10,7 +10,9 @@ import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.PatternSyntaxException;
 
 import javax.xml.transform.Source;
 
@@ -34,6 +36,7 @@ public class Problem implements Parcelable {
     private TargetText targetText;
     @Ignore
     private RejectText rejectText;
+    @Ignore List<String> solutions;
 
     Problem(int id, String title, int difficulty, int shortest,
             String targetString, String rejectString, String source) {
@@ -46,6 +49,10 @@ public class Problem implements Parcelable {
         this.targetText = new TargetText(targetString);
         this.rejectText = new RejectText(rejectString);
         this.source = source;
+        this.solutions = MainActivity.database.problemDao().getProblemSolutions(id);
+        if (this.solutions == null) {
+            this.solutions = new ArrayList<>();
+        }
     }
 
     public int getId() { return id; }
@@ -85,6 +92,40 @@ public class Problem implements Parcelable {
                 + " Shortest known solution: " + shortest
                 + " Source:" + source;
     }
+
+    public String getSolutionsString() {
+        if (solutions == null) {
+            return "";
+        }
+        String sols = "Solutions:\n";
+        for (int i = 0; i < solutions.size(); i += 1) {
+            sols += solutions.get(i) + "\n";
+        }
+        return sols;
+    }
+
+    public int submitSolution(String regex) {
+        // Make sure all of targetText and none of rejectText are selected
+        try {
+            targetText.performRegex(regex);
+            rejectText.performRegex(regex);
+        } catch (PatternSyntaxException e) { return -1; }
+        if (targetText.selected.contains(false) | rejectText.selected.contains(true)) {
+            return -1;
+        }
+        else if (solutions!=null && solutions.contains(regex)) {
+            return -2;
+        }
+        else {
+            MainActivity.database.problemDao().submitCorrect(regex, id, regex.length());
+            solutions = MainActivity.database.problemDao().getProblemSolutions(id);
+            if (solutions == null) {
+                solutions = new ArrayList<>();
+            }
+            return 0;
+        }
+    }
+
     // Add problem to database if not already there
     public int addToDB() {
         List<Problem> check = MainActivity.database.problemDao().getAllProblems();
@@ -99,6 +140,8 @@ public class Problem implements Parcelable {
         );
         return 0;
     }
+
+
 
     // Make this parcelable
     @Override
@@ -137,5 +180,9 @@ public class Problem implements Parcelable {
         targetText = new TargetText(in.readString());
         rejectText = new RejectText(in.readString());
         source = in.readString();
+        solutions = MainActivity.database.problemDao().getProblemSolutions(id);
+        if (solutions == null) {
+            solutions = new ArrayList<>();
+        }
     }
 }

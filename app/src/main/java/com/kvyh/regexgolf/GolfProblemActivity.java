@@ -19,6 +19,7 @@ public class GolfProblemActivity extends AppCompatActivity {
     private TextView targetTextView;
     private TextView rejectTextView;
     private TextView errorTextView;
+    private TextView solutionsTextView;
     private Problem activeProblem;
 
 
@@ -34,6 +35,7 @@ public class GolfProblemActivity extends AppCompatActivity {
         targetTextView = findViewById(R.id.golf_problem_desired_text_view);
         rejectTextView = findViewById(R.id.golf_problem_undesired_text_view);
         errorTextView = findViewById(R.id.golf_problem_regex_error);
+        solutionsTextView = findViewById(R.id.solutions);
 
         regexEditText.addTextChangedListener(new TextWatcher() {
             @Override
@@ -59,12 +61,15 @@ public class GolfProblemActivity extends AppCompatActivity {
         titleTextView.setText(activeProblem.getTitle());
         targetTextView.setText(activeProblem.getTargetDisplayString("^$"), TextView.BufferType.SPANNABLE);
         rejectTextView.setText(activeProblem.getRejectDisplayString("^$"), TextView.BufferType.SPANNABLE);
+        solutionsTextView.setText(activeProblem.getSolutionsString());
 
         Button button = findViewById(R.id.regex_submit_button);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Code here executes on main thread after user presses button
+                activeProblem.submitSolution(regexEditText.getText().toString());
                 testRegexText(true);
+                solutionsTextView.setText(activeProblem.getSolutionsString());
             }
         });
     }
