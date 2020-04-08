@@ -3,6 +3,7 @@ package com.kvyh.regexgolf;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.text.SpannableString;
+import android.util.Log;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
@@ -80,16 +81,16 @@ public class Problem implements Parcelable {
     public String getSource() { return source; }
 
     public String getInfo() {
-        return "Difficulty: " + String.valueOf(difficulty)
-                + " Shortest known solution: " + String.valueOf(shortest)
+        return "Difficulty: " + difficulty
+                + " Shortest known solution: " + shortest
                 + " Source:" + source;
     }
     // Add problem to database if not already there
     public int addToDB() {
-        List<Problem> check = MainActivity.adapter.problems;
+        List<Problem> check = MainActivity.database.problemDao().getAllProblems();
         for (int i = 0; i < check.size(); i += 1) {
-            if (check.get(i).targetString.equals(targetString)
-                && check.get(i).rejectString.equals(rejectString)) {
+            if (check.get(i).getTargetString().equals(targetString)
+                && check.get(i).getRejectString().equals(rejectString)) {
                 return -1;
             }
         }
