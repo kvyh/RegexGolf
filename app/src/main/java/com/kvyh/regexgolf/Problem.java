@@ -100,7 +100,6 @@ public class Problem implements Parcelable {
         return 0;
     }
 
-
     // Make this parcelable
     @Override
     public int describeContents() {

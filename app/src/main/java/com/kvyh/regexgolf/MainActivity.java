@@ -1,26 +1,16 @@
 package com.kvyh.regexgolf;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
 
 import android.os.Bundle;
-import android.util.Log;
-
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.IOException;
-import java.io.InputStreamReader;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
@@ -38,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
                 .allowMainThreadQueries()
                 .build();
 
-        recyclerView = findViewById(R.id.main_menu);
+        recyclerView = findViewById(R.id.main_recycler);
         adapter = new ProblemListAdapter(getApplicationContext());
         layoutManager = new LinearLayoutManager(this);
 
@@ -52,5 +42,21 @@ public class MainActivity extends AppCompatActivity {
             startActivity(getIntent());
         }
     }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+        getMenuInflater().inflate(R.menu.options_menu, menu);
+        return true;
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_reload:
+                adapter.addDefaultProblems(getApplicationContext());
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
 }

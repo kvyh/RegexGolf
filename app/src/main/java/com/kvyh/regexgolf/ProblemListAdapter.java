@@ -59,14 +59,15 @@ public class ProblemListAdapter extends
     ProblemListAdapter(Context context) {
         reload();
         if (problems.size() == 0) {
-            requestQueue = Volley.newRequestQueue(context);
-            addDefaultProblems();
+            addDefaultProblems(context);
 
             notifyDataSetChanged();
         }
     }
 
-    public void addDefaultProblems() {
+    public void addDefaultProblems(Context context) {
+        requestQueue = Volley.newRequestQueue(context);
+
         String url = "https://kvyh.github.io/RegexGolf/app/src/main/res/raw/default_problems.json";
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
@@ -93,6 +94,7 @@ public class ProblemListAdapter extends
             }
         });
         requestQueue.add(request);
+        reload();
         Log.i("kvyhregex", String.valueOf(problems.size()));
     }
 
