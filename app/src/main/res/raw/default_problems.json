@@ -18,7 +18,25 @@
     "difficulty": 1,
     "shortest": 5,
     "target": "feet\nfind\nmead\nmeer\nmean\nmite\nflakey\nfake",
-    "reject": "tail\ntale\nstyle\nseal\nsnail\ngreen\nneed\nbind",
-    "source": "Kvyh"}
+    "reject": "tail\ntale\nstyle\nseem\nsnail\ngreen\nneed\nbind",
+    "source": "Kvyh"},
+  {
+    "id": 3,
+    "title": "Quantifiers",
+    "difficulty": 3,
+    "shortest": 8,
+    "target": "abac\naccede\nadead\nbabe\nbead\nbebed\nbedad\nbedded\nbedead\nbedeaf\ncaba\ncaffa\ndace\ndade\ndaff\ndead\ndeed\ndeface\nfaded\nfaff\nfeed",
+    "reject": "beam\nbuoy\ncanjac\nchymia\ncorah\ncupula\ngriece\nhafter\nidic\nlucy\nmartyr\nmatron\nmessrs\nmucose\nrelose\nsonly\ntegua\nthreap\ntowned\nwidish\nyite",
+    "source": "alf.nu/RegexGolf"
+  },
+  {
+    "id": 4,
+    "title": "Anchors",
+    "difficulty": 3,
+    "shortest": 4,
+    "target": "Mick\nRick\nallocochick\nbacktrick\nbestick\ncandlestick\ncounterprick\nheartsick\nlampwick\nlick\nlungsick\npotstick\nquick\nrampick\nrebrick\nrelick\nseasick\nslick\ntick\nunsick\nupstick",
+    "reject": "Kickapoo\nNickneven\nRickettsiales\nbillsticker\nborickite\nchickell\nfickleness\nfinickily\nkilbrickenite\nlickpenny\nmispickel\nquickfoot\nquickhatch\nricksha\nrollicking\nslapsticky\nsnickdrawing\nsunstricken\ntricklingly\nunlicked\nunnickeled",
+    "source": "alf.nu/RegexGolf"
+  }
   ]
 }
