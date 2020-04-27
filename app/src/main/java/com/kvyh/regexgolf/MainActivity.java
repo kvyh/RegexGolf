@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
 
         adapter.reload();
         // If the adapter isn't registering problems correctly, reload
-        if (adapter.problems.size() < database.problemDao().getAllProblems().size()){
+        if (adapter.problems.size() < database.problemDao().getAllProblems().size() || adapter.problems.size() == 0){
             finish();
             startActivity(getIntent());
         }

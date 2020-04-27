@@ -1,6 +1,7 @@
 package com.kvyh.regexgolf;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import android.os.Bundle;
 import android.text.Editable;
@@ -67,8 +68,16 @@ public class GolfProblemActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Code here executes on main thread after user presses button
-                activeProblem.submitSolution(regexEditText.getText().toString());
+                int check = activeProblem.submitSolution(regexEditText.getText().toString());
                 testRegexText(true);
+                if (check == 0) {
+                    errorTextView.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.colorSuccessGreen));
+                    errorTextView.setText("Correct!");
+                }
+                else if (check == -2) {
+                    errorTextView.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.colorSuccessGreen));
+                    errorTextView.setText("Already found.");
+                }
                 solutionsTextView.setText(activeProblem.getSolutionsString());
             }
         });
@@ -77,8 +86,10 @@ public class GolfProblemActivity extends AppCompatActivity {
         try {
             targetTextView.setText(activeProblem.getTargetDisplayString(regexEditText.getText().toString()), TextView.BufferType.SPANNABLE);
             rejectTextView.setText(activeProblem.getRejectDisplayString(regexEditText.getText().toString()), TextView.BufferType.SPANNABLE);
+            errorTextView.setText("");
         } catch (PatternSyntaxException e) {
             if (displayError) {
+                errorTextView.setTextColor(ContextCompat.getColor(this, R.color.colorErrorRed));
                 errorTextView.setText(e.getMessage());
             }
         }
