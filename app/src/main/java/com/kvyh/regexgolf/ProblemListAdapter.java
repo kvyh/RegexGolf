@@ -78,7 +78,7 @@ public class ProblemListAdapter extends
                         JSONObject prob = array.getJSONObject(i);
                         Problem tempProblem = new Problem(prob.getInt("id"),
                                 prob.getString("title"),
-                                prob.getInt("difficulty"),
+                                prob.getInt("complexity"),
                                 prob.getInt("shortest"),
                                 prob.getString("target"),
                                 prob.getString("reject"),

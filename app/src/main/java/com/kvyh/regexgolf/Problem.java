@@ -3,7 +3,6 @@ package com.kvyh.regexgolf;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.text.SpannableString;
-import android.util.Log;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
@@ -14,16 +13,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.PatternSyntaxException;
 
-import javax.xml.transform.Source;
-
 @Entity(tableName = "problems")
 public class Problem implements Parcelable {
     @PrimaryKey
     private int id;
     @ColumnInfo(name = "title")
     private String title;
-    @ColumnInfo(name = "difficulty")
-    private int difficulty;
+    @ColumnInfo(name = "complexity")
+    private int complexity;
     @ColumnInfo(name = "shortest")
     private int shortest;
     @ColumnInfo(name = "target")
@@ -38,11 +35,11 @@ public class Problem implements Parcelable {
     private RejectText rejectText;
     @Ignore List<String> solutions;
 
-    Problem(int id, String title, int difficulty, int shortest,
+    Problem(int id, String title, int complexity, int shortest,
             String targetString, String rejectString, String source) {
         this.id = id;
         this.title = title;
-        this.difficulty = difficulty;
+        this.complexity = complexity;
         this.shortest = shortest;
         this.targetString = targetString;
         this.rejectString = rejectString;
@@ -81,14 +78,14 @@ public class Problem implements Parcelable {
 
     public SpannableString getRejectDisplayString(String regex) { return rejectText.getDisplayString(regex); }
 
-    public int getDifficulty() { return difficulty; }
+    public int getComplexity() { return complexity; }
 
     public int getShortest() { return shortest; }
 
     public String getSource() { return source; }
 
     public String getInfo() {
-        return "Difficulty: " + difficulty
+        return "Complexity: " + complexity
                 + " Shortest known solution: " + shortest
                 + " Source:" + source;
     }
@@ -104,7 +101,7 @@ public class Problem implements Parcelable {
         return sols;
     }
 
-    public int submitSolution(String regex) {
+    int submitSolution(String regex) {
         // Make sure all of targetText and none of rejectText are selected
         try {
             targetText.performRegex(regex);
@@ -118,6 +115,7 @@ public class Problem implements Parcelable {
         }
         else {
             MainActivity.database.problemDao().submitCorrect(regex, id, regex.length());
+            MainActivity.database.problemDao().updateshortest(id, regex.length());
             solutions = MainActivity.database.problemDao().getProblemSolutions(id);
             if (solutions == null) {
                 solutions = new ArrayList<>();
@@ -136,7 +134,7 @@ public class Problem implements Parcelable {
             }
         }
         MainActivity.database.problemDao().recordProblem(
-                title, difficulty, shortest, targetString, rejectString, source
+                title, complexity, shortest, targetString, rejectString, source
         );
         return 0;
     }
@@ -153,7 +151,7 @@ public class Problem implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(id);
         dest.writeString(title);
-        dest.writeInt(difficulty);
+        dest.writeInt(complexity);
         dest.writeInt(shortest);
         dest.writeString(targetString);
         dest.writeString(rejectString);
@@ -175,7 +173,7 @@ public class Problem implements Parcelable {
     protected Problem(Parcel in) {
         id = in.readInt();
         title = in.readString();
-        difficulty = in.readInt();
+        complexity = in.readInt();
         shortest = in.readInt();
         targetText = new TargetText(in.readString());
         rejectText = new RejectText(in.readString());

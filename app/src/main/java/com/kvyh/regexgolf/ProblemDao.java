@@ -18,9 +18,11 @@ public interface ProblemDao {
     List<Problem> getAllProblems();
 
     // Anything that calls this needs to check for unique target/reject string
-    @Query("INSERT INTO problems (title, difficulty, shortest, target, reject, source) " +
-            "VALUES (:title, :difficulty, :shortest, :target_string, :reject_string, :source)")
-    void recordProblem(String title, int difficulty, int shortest,
+    @Query("INSERT INTO problems (title, complexity, shortest, target, reject, source) " +
+            "VALUES (:title, :complexity, :shortest, :target_string, :reject_string, :source)")
+    void recordProblem(String title, int complexity, int shortest,
                        String target_string, String reject_string, String source);
 
+    @Query("UPDATE problems SET shortest = :length WHERE id = :id")
+    void updateshortest(int id, int length);
 }
