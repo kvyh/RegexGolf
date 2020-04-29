@@ -18,8 +18,9 @@
     <include layout="@layout/regex_input_field"/>
 
     <TextView
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
         android:textColor="@color/colorErrorRed"
         android:id="@+id/golf_problem_regex_error"
         />

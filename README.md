@@ -1,11 +1,11 @@
-(https://xkcd.com/1313/)# Regex Golf
+# Regex Golf
 
 ## Table of contents
 * [What is Regex](#what-is-regex)
 * [What is Regex Golf](#what-is-regex-golf)
 * [Setup](#setup)
-	-[From Release](#from-release)
-	-[With Android Studio](#with-android-studio)
+    - [From Release](#from-release)
+    - [With Android Studio](#with-android-studio)
 * [How to Contribute](#how-to-contribute)
 * [Acknowledgements](#acknowledgements)
 
